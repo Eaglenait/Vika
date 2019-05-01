@@ -2,7 +2,7 @@ import json
 
 class VikaObjectHelper:
     def __init__(self):
-        path = "/home/seb/vika/objectsWordList.json"
+        path = "/home/seb/vika/wordLists/objectsWordList.json"
         with open(path, "r") as objects_file:
             self.objects_json = json.load(objects_file)
 

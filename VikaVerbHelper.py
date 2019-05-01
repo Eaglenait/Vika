@@ -2,7 +2,7 @@ import json
 
 class VikaVerbHelper:
     def __init__(self):
-        path = "/home/seb/vika/verbsWordList.json"
+        path = "/home/seb/vika/wordLists/verbsWordList.json"
         with open(path, "r") as verbs_file:
             self.verbs_json = json.load(verbs_file)
 
