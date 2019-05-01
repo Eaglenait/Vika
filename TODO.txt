@@ -1,6 +1,13 @@
 Deconstructeur syntaxique
-	détection verbes 
+	OK détection verbes 
 	détection objet ex:la lumière
 	détection du contexte ex:la chambre
 	détection du nombre
+
+phrases types à gérer
+-met la musique moins fort
+-ouvre la porte
+-allume la lumière de la cuisine
+-allume toute les lumières du salon
+-éteind le son de la télé
 

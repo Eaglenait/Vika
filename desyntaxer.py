@@ -1,22 +1,14 @@
-import json
-#aucun accent
-#forme radicale du verbe
-
-path = "/home/seb/vika/verbsWordList.json"
-with open(path, "r") as verbs_file:
-    verbs_json = json.load(verbs_file)
+import VikaVerbHelper
+import VikaSyntax
 
 sentence = input()
 
-def isVerb(word) -> bool:
-    for verb in verbs_json:
-        if word.find(verb["r"]):
-            print(verb["id"])
-            print(verb["s"])
-            return True
-        else:
-            return False
+verbHelper = VikaVerbHelper.VikaVerbHelper()
+syntax = VikaSyntax.VikaSyntax()
 
 for word in sentence.split():
-    if isVerb(str(word)):
-        print("verb found: ", word)
+    currentVerb = verbHelper.GetVerb(str(word))
+    if currentVerb != None:
+        syntax.verbs.append(currentVerb)
+
+syntax.Print()
