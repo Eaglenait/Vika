@@ -2,12 +2,17 @@ la liste de verbes format json
 elle liste les verbes sous format
 
 {
-	"1": {				//ID du verbe, est utilisée lorsque l'on doit référrer à ce verbe
+	{				
+		"id": 0			//ID du verbe, est utilisée lorsque l'on doit référrer à ce verbe
 		"r": "allum",		//Forme radicale du verbe, ici allumer
 		"s": ["2","3"]		//Synonymes du verbe par id
 	},
-	"2":{
+	{
 		...
 	}
 }
 
+Pour le fichier object
+id identifiant
+n name
+s synonyms

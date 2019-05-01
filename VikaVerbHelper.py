@@ -6,7 +6,7 @@ class VikaVerbHelper:
         with open(path, "r") as verbs_file:
             self.verbs_json = json.load(verbs_file)
 
-    #gets the synonyms for a given verb
+    #gets the synonyms for a given verb (verb as dict)
     def GetVerbSynonyms(self, verb):
         verbIds = list()
         synonyms = list()
