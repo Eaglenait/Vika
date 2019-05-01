@@ -1,5 +1,6 @@
 import VikaVerbHelper
 import VikaObjectHelper
+import VikaLocalisationHelper
 import VikaSyntax
 
 while(True):
@@ -7,6 +8,7 @@ while(True):
 
     verbHelper = VikaVerbHelper.VikaVerbHelper()
     objectHelper = VikaObjectHelper.VikaObjectHelper()
+    localisationHelper = VikaLocalisationHelper.VikaLocalisationHelper()
     syntax = VikaSyntax.VikaSyntax()
 
     for word in sentence.split():
@@ -26,5 +28,13 @@ while(True):
             syns = objectHelper.GetObjectSynonyms(currentObject)
             for syn in syns:
                 syntax.objects.append(syn)
+
+        #localisation detection
+        currentLocalisation = localisationHelper.GetLocalisation(str(word))
+        if currentLocalisation != None:
+            syntax.localisation.append(currentLocalisation)
+            syns = localisationHelper.GetLocalisationSynonyms(currentLocalisation)
+            for syn in syns:
+                syntax.localisation.append(syn)
 
     syntax.Print()
