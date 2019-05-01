@@ -1,0 +1,6 @@
+Deconstructeur syntaxique
+	détection verbes 
+	détection objet ex:la lumière
+	détection du contexte ex:la chambre
+	détection du nombre
+
