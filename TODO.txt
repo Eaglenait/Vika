@@ -1,8 +1,5 @@
 Deconstructeur syntaxique
-	OK détection verbes 
-	détection objet ex:la lumière
-	détection du contexte ex:la chambre
-	détection du nombre
+	détection du nombre     
 
 phrases types à gérer
 -met la musique moins fort
@@ -11,3 +8,12 @@ phrases types à gérer
 -allume toute les lumières du salon
 -éteind le son de la télé
 
+Service discovery esp
+    Faire l'avertisement m-dns + dns-sd
+       Diffuser service "vika"
+       Exposer getConfig() dans esp
+    Get config des esp trouvés 
+Copier les config dans vika
+  
+Recherche syntaxique
+    Trouver un match entre la syntaxe détectée et une config esp 
