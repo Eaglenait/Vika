@@ -3,38 +3,45 @@ import VikaObjectHelper
 import VikaLocalisationHelper
 import VikaSyntax
 
-while(True):
-    sentence = input() 
+class Desyntaxer:
+    def __init__(self): 
+        self.verbHelper = VikaVerbHelper.VikaVerbHelper()
+        self.objectHelper = VikaObjectHelper.VikaObjectHelper()
+        self.localisationHelper = VikaLocalisationHelper.VikaLocalisationHelper()
+        self.syntax = VikaSyntax.VikaSyntax()
 
-    verbHelper = VikaVerbHelper.VikaVerbHelper()
-    objectHelper = VikaObjectHelper.VikaObjectHelper()
-    localisationHelper = VikaLocalisationHelper.VikaLocalisationHelper()
-    syntax = VikaSyntax.VikaSyntax()
+    def GetSyntax(self, sentence) -> VikaSyntax:
+        print()
+        print(sentence)
+        for word in sentence.split():
+            if(word == "le" or word == 'la'):
+                self.syntax.objectPlural = False
+                pass
+            if( word == 'les'):
+                self.syntax.objectPlural = True
+                pass
 
-    for word in sentence.split():
-        #verb detection
-        currentVerb = verbHelper.GetVerb(str(word))
-        if currentVerb != None:
-            syntax.verbs.append(currentVerb)
-            syns = verbHelper.GetVerbSynonyms(currentVerb)
-            for syn in syns:
-                syntax.verbs.append(syn)
+            #verb detection
+            currentVerb = self.verbHelper.GetVerb(str(word))
+            if currentVerb != None:
+                self.syntax.verbs.append(currentVerb)
+                syns = self.verbHelper.GetVerbSynonyms(currentVerb)
+                for syn in syns:
+                    self.syntax.verbs.append(syn)
 
+            #object detection
+            currentObject = self.objectHelper.GetObject(str(word))
+            if currentObject != None:
+                self.syntax.objects.append(currentObject)
+                syns = self.objectHelper.GetObjectSynonyms(currentObject)
+                for syn in syns:
+                    self.syntax.objects.append(syn)
 
-        #object detection
-        currentObject = objectHelper.GetObject(str(word))
-        if currentObject != None:
-            syntax.objects.append(currentObject)
-            syns = objectHelper.GetObjectSynonyms(currentObject)
-            for syn in syns:
-                syntax.objects.append(syn)
-
-        #localisation detection
-        currentLocalisation = localisationHelper.GetLocalisation(str(word))
-        if currentLocalisation != None:
-            syntax.localisation.append(currentLocalisation)
-            syns = localisationHelper.GetLocalisationSynonyms(currentLocalisation)
-            for syn in syns:
-                syntax.localisation.append(syn)
-
-    syntax.Print()
+            #localisation detection
+            currentLocalisation = self.localisationHelper.GetLocalisation(str(word))
+            if currentLocalisation != None:
+                self.syntax.localisation.append(currentLocalisation)
+                syns = self.localisationHelper.GetLocalisationSynonyms(currentLocalisation)
+                for syn in syns:
+                    self.syntax.localisation.append(syn)
+        return self.syntax

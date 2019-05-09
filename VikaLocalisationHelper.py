@@ -2,7 +2,7 @@ import json
 
 class VikaLocalisationHelper:
     def __init__(self):
-        path = "/home/seb/vika/wordLists /locationWordList.json"
+        path = "/home/seb/vika/wordLists/locationWordList.json"
         with open(path, "r") as localisation_file:
             self.localisation_json = json.load(localisation_file)
 
