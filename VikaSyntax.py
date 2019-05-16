@@ -2,9 +2,33 @@ class VikaSyntax:
     def __init__(self):
         self.verbs = list()
         self.localisation = list()
-        
-        self.objectPlural = bool
         self.objects = list()
+        self.objectPlural = bool
+
+    def HasVerb(self, verb: str) -> bool:
+        for v in self.verbs:
+            if(v["r"] in verb):
+                print("Verb found")
+                return True
+        return False;
+
+    def HasLocalisation(self, loc: str) -> bool:
+        for l in self.localisation:
+            print(l)
+            print(l["n"])
+            if(l["n"] in loc):
+                print("Localisation found")
+                return True
+        return False;
+
+    def HasObject(self, obj: str) -> bool:
+        for o in self.objects:
+            print(o)
+            print(o["n"])
+            if(o["n"] in obj):
+                print("object found")
+                return True
+        return False;
 
     def PrintSyntax(self):
         print("Verbs")

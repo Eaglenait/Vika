@@ -11,8 +11,7 @@ class Desyntaxer:
         self.syntax = VikaSyntax.VikaSyntax()
 
     def GetSyntax(self, sentence) -> VikaSyntax:
-        print()
-        print(sentence)
+        self.syntax = VikaSyntax.VikaSyntax()
         for word in sentence.split():
             if(word == "le" or word == 'la'):
                 self.syntax.objectPlural = False
