@@ -7,6 +7,7 @@ import json
 
 from zeroconf import ServiceBrowser, Zeroconf
 
+'''Represent a configured action on a device'''
 class VikaAction:
     def __init__(self, url: str, verbs : list(), localisation: str, objects: list()):
         self.Url = url
@@ -28,6 +29,7 @@ class VikaAction:
         print(*self.Objects)
         print()
 
+    '''returns the matching percentage between a syntax and this action'''
     def Match(self, syntax: VikaSyntax) -> int:
         print("passed syntax")
         syntax.PrintSyntax()
@@ -55,12 +57,14 @@ class VikaAction:
         print("match score:", score)
         return (score*100)/maxScore
 
+'''represent a device that has actions and a config'''
 class VikaDevice:
     def __init__(self, addr):
         self.address = addr
         self.actions = list()
         self.HasBeenInit = False
     
+    '''Copies a devices config'''
     def GetConfig(self):
         ipstr = str(self.address[0]) + "." + str(self.address[1]) + "." + str(self.address[2]) + "." + str(self.address[3])
         self.address = ipstr
@@ -75,14 +79,21 @@ class VikaDevice:
         self.HasBeenInit = True
         print("config has been read")
 
+'''Handles the devices on the network'''
 class DeviceHandler:
     def __init__(self):
-        self.device = list()
+        self.devices = list()
         self.zeroconf = Zeroconf()
         self.serviceBrowser = ServiceBrowser(self.zeroconf, "_vika._tcp.local.", self)
 
+    def InitDevices(self):
+        for d in self.devices:
+            if(not d.HasBeenInit):
+                d.GetConfig()
+
+    '''Tries to match the given syntax to a devices config'''
     def MatchSyntax(self, syntax: VikaSyntax) -> str:
-        for d in self.device:
+        for d in self.devices:
             for action in d.actions:
                 if(action.Match(syntax) >= 50):
                     deviceUrl = "http://" + d.address + action.Url
@@ -91,12 +102,14 @@ class DeviceHandler:
                 else:
                     print("no match found")
 
+    '''called when a device disconnects'''
     def remove_service(self, zeroconf, type, name):
         print("service removed")
-        for d in self.device:
+        for d in self.devices:
             if(d.name == name):
-                self.device.remove(d)
+                self.devices.remove(d)
 
+    '''called when a device connects, adds the device to the deviceHandler'''
     def add_service(self, zeroconf, type, name):
         info = zeroconf.get_service_info(type,name)
         addr = info.address
@@ -105,8 +118,10 @@ class DeviceHandler:
         for i in addr:
             intaddr.append(i)
 
-        addresses = [device for device in self.device]
+        addresses = [device for device in self.devices]
         if(intaddr not in addresses):
-            self.device.append(VikaDevice(intaddr))
+            self.devices.append(VikaDevice(intaddr))
         else:
             print("duplicate device")
+
+        self.InitDevices()

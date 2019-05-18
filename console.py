@@ -28,11 +28,9 @@ if __name__ == '__main__':
             if(len(commands) > 1):
                 if(len(commands) >= 2):
                     if(commands[1] == "print"):
-                        for device in deviceHandler.device:
+                        for device in deviceHandler.devices:
+                            print("init: ", end="")
                             print(device.address,device.HasBeenInit)
-                    if(commands[1] == "init"):
-                        for device in deviceHandler.device:
-                            device.GetConfig()
         elif(commands[0] == "match"):
             commands.pop(0)
             syn = desyntaxer.GetSyntax(' '.join(word for word in commands))

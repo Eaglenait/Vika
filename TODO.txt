@@ -6,9 +6,8 @@ phrases types à gérer
 	-éteind le son de la télé
 
 Service discovery esp
-	Faire la découverte de services m-dns + dns-sd '_vika._tcp'
 	Get config des esp trouvés 
-	Copier les config dans vika
+		gérer le fail du getConfig
 	comment ajouter la détection en arrière plan du reste du programme.
   
 Recherche syntaxique
