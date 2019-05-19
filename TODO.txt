@@ -6,8 +6,6 @@ phrases types à gérer
 	-éteind le son de la télé
 
 Service discovery esp
-	Get config des esp trouvés 
-		gérer le fail du getConfig
 	comment ajouter la détection en arrière plan du reste du programme.
   
 Recherche syntaxique

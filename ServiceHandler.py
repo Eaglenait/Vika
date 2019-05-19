@@ -69,12 +69,16 @@ class VikaDevice:
         ipstr = str(self.address[0]) + "." + str(self.address[1]) + "." + str(self.address[2]) + "." + str(self.address[3])
         self.address = ipstr
         configUrl = "http://" + ipstr + "/getConfig"
+
         config = requests.get(configUrl)
 
         strconfig = json.dumps(config.json())
         jsonConfig = json.loads(strconfig)
         for action in jsonConfig["a"]:
-            self.actions.append(VikaAction(action["url"], action["verbs"], action["loc"], action["obj"]))
+            self.actions.append(VikaAction(action["url"], 
+                                           action["verbs"], 
+                                           action["loc"], 
+                                           action["obj"]))
 
         self.HasBeenInit = True
         print("config has been read")
